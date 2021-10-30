@@ -21,6 +21,12 @@ gameShadow.src = "./img/gameShadow.png";
 var fade = new Image(250, 250);
 fade.src = "./img/FadeNegro.png";
 
+var ballTrailInt = 0;
+var ballTrails = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+var bTints = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var bTx = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var bTy = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 var bg1x = -465;
 var bg2x = 0;
 var bg3x = 465;
@@ -126,7 +132,7 @@ const red = {
 //Funcion para dibujar la red
 function drawRed(ctx) {
     for (let i = 0; i < canvas.height; i += red.height * 1.5) {
-        drawRect(red.x, red.y + i, red.width, red.height, "rgba(0, 0, 0, 0.4)", ctx);
+        drawRect(red.x, red.y + i, red.width, red.height, "#78E076", ctx);
     }
 }
 
@@ -304,7 +310,32 @@ function render() {
     drawRect(bot.x, bot.y, bot.width, bot.height, "#00000000", ctx);
 
     //Bola Shadow
-    drawCircle(ball.x + 8, ball.y + 8, ball.radius, "rgba(0, 0, 0, 0.4)", ctx);
+    drawCircle(ball.x + 8, ball.y + 8, ball.radius, "rgba(0, 0, 0, 0.25)", ctx);
+
+    //Ball trail things
+    for (let i = 0; i < ballTrails.length - 1; i++) {
+        if (ballTrails[i] == true) {
+            if (bTints[i] == 12) {
+                bTx[i] = ball.x;
+                bTy[i] = ball.y;
+                console.log("tetas");
+            }
+            if (bTints[i] <= 11)
+                drawCircle(bTx[i] + 8, bTy[i] + 8, ((bTints[i] / 12)) * ball.radius, "rgba(0, 0, 0, 0.25)", ctx); //Shadow
+            bTints[i]--;
+            if (bTints[i] <= 0) {
+                ballTrails[i] = false;
+                bTints[i] = 12;
+                bTx[i] = 0;
+                bTy[i] = 0;
+            }
+        }
+    }
+    for (let i = 0; i < ballTrails.length - 1; i++) {
+        if (ballTrails[i] == true) {
+            drawCircle(bTx[i], bTy[i], ((bTints[i] / 12)) * ball.radius, "#62B9FF", ctx); //Circle
+        }
+    }
 
     //Bola
     drawCircle(ball.x, ball.y, ball.radius, "#62B9FF", ctx);
@@ -434,9 +465,11 @@ function update() {
     if (ball.y + ball.radius > canvas.height) {
         ball.velocityY = -ball.velocityY;
         ball.velocityY -= 0.6;
+        ball.y = canvas.height - ball.radius - 2;
     } else if (ball.y - ball.radius < 0) {
         ball.velocityY = -ball.velocityY;
         ball.velocityY += 0.6;
+        ball.y = ball.radius + 2;
     }
 
     //Comprobar si la bola está en la izquierda o en la derecha para llamar a la función collision de user o bot.
@@ -477,6 +510,21 @@ function update() {
         bg2x = -450;
     else if (bg3x >= 930)
         bg3x = -450;
+
+    //Ball trail things
+    ballTrailInt++;
+
+    /*if (ballTrailInt % 2 == 0) {
+        ballTrails[(ballTrailInt / 2) - 1] = true;
+    }
+    if (ballTrailInt > 34) {
+        ballTrailInt = 0;
+    }*/
+    ballTrails[ballTrailInt - 1] = true;
+    if (ballTrailInt > 15) {
+        ballTrailInt = 0;
+    }
+
 }
 
 //Game function
