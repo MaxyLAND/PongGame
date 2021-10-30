@@ -1,11 +1,62 @@
 #pong {
-    border: 8px solid black;
+    border: 8px solid #78E076;
     border-radius: 30px;
+}
+
+#pongDiv {
+    border: 16px solid #8BFF89;
+    border-radius: 50px;
+    width: 1016px;
+    height: 416px;
+}
+
+#pongShadow {
+    border: 0px solid black;
+    border-radius: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1078px;
+    height: 478px;
+    position: absolute;
+}
+
+#pongShadowShadow {
+    border: 0px solid black;
+    border-radius: 60px;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 1048px;
+    height: 448px;
+    margin-left: 24px;
+    margin-top: 24px;
+    position: absolute;
+}
+
+#allPong {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1050px;
+    height: 450px;
 }
 
 .center {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 8%;
+}
+
+#PowerUpBar {
+    display: flex;
+    justify-content: center;
+    gap: 250px;
+}
+
+#UserPowerUpBar {
+    border: 8px solid black;
+    border-radius: 30px;
+}
+
+#BotPowerUpBar {
+    border: 8px solid black;
+    border-radius: 30px;
 }
