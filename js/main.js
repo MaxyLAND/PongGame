@@ -192,7 +192,6 @@ function checkKey(e) {
 
     e = e || window.event;
 
-    console.log(moveEff);
     if (!moveEff) {
         if (e.keyCode == "32") { //Space
             moveEff = true;
@@ -203,15 +202,17 @@ function checkKey(e) {
             oldPos = user.x + 50;
             func1 = setInterval(playerMoveEff, 1000 / fps);
             func2 = setInterval(waitForPowerUp, 1000 / fps);
-        } else if (e.keyCode == "38" || e.keyCode == "87") { // up arrow / w
-
-        } else if (e.keyCode == "40" || e.keyCode == "83") { // down arrow
-
-        } else if (e.keyCode == "37" || e.keyCode == "65") { // left arrow
-            alert(bg_01_01x);
-        } else if (e.keyCode == "39" || e.keyCode == "68") { // right arrow
-
         }
+    }
+
+    if (e.keyCode == "38" || e.keyCode == "87") { // up arrow / w
+
+    } else if (e.keyCode == "40" || e.keyCode == "83") { // down arrow
+
+    } else if (e.keyCode == "37" || e.keyCode == "65") { // left arrow
+        alert(bg_01_01x);
+    } else if (e.keyCode == "39" || e.keyCode == "68") { // right arrow
+
     }
 }
 

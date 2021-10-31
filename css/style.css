@@ -1,42 +1,24 @@
 #pong {
-    border: 8px solid #78E076;
+    border: 0.5vw solid #78E076;
     background-color: #78E076;
-    border-radius: 30px;
+    border-radius: 2vw;
+    width: 97%;
+    height: 95%;
 }
 
 #pongDiv {
-    border: 16px solid #8BFF89;
+    border: 1vw solid #8BFF89;
     background-color: #8BFF89;
-    border-radius: 50px;
-    width: 1016px;
-    height: 416px;
-}
-
-#pongShadow {
-    border-radius: 60px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 1078px;
-    height: 478px;
-    position: absolute;
-}
-
-#pongShadowShadow {
-    border-radius: 60px;
-    background-color: rgba(0, 0, 0, 0.4);
-    width: 1048px;
-    height: 448px;
-    margin-left: 24px;
-    margin-top: 24px;
-    position: absolute;
-}
-
-#allPong {
+    border-radius: 3vw;
+    width: 53%;
+    height: 62%;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 1050px;
-    height: 450px;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    box-shadow: 1.75vw 1.75vw 0 0 rgba(0, 0, 0, 0.40);
 }
 
 .center {
@@ -48,20 +30,26 @@
 #PowerUpBar {
     display: flex;
     justify-content: center;
-    gap: 250px;
+    gap: 15%;
 }
 
 .PUbar {
-    border: 16px solid #8BFF89;
+    border: 1vw solid #8BFF89;
     background-color: #8BFF89;
-    border-radius: 30px;
+    border-radius: 1.75vw;
+    box-shadow: 1.75vw 1.75vw 0 0 rgba(0, 0, 0, 0.40);
+    width: 15%;
 }
 
 #game {
     position: absolute;
     width: 100%;
     height: 73%;
-    margin-top: 6.5%;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
 }
 
 #BG {
