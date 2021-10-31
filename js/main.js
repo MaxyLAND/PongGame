@@ -560,15 +560,10 @@ function update() {
         console.log("gay lol");
     }*/
 
-    mouseBool = false;
-    canvas.addEventListener("mousemove", movePaddle);
+    //mouseBool = false;
+    //canvas.addEventListener("mousemove", movePaddle);
     //drawButt.style.bottom = (((-user.y + 50) / 410) + 0.75) * 410 + "px";
-
-    if (!mouseBool) {
-        user.y = -drawButt.value + 350;
-    } else {
-
-    }
+    user.y = -drawButt.value + 350;
 
     //Mover el bot haciendo uso de la posición de la ball y la suya propia, multiplicado por un nivel dinámico del bot.
     bot.y += (ball.y - (bot.y + bot.height / 2)) * computerLevel;
