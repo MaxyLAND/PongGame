@@ -43,6 +43,8 @@ var bg_03_01x = -1700;
 var bg_03_02x = -100;
 var bg_03_03x = 1500;
 
+var mouseBool = false;
+
 /*                              IMAGEN:
 base_image = new Image();
 base_image.src = 'img/base.png';
@@ -61,6 +63,10 @@ const ctxBot = canvasBotPU.getContext("2d");
 
 const canvasBG = document.getElementById("BG");
 const ctxBG = canvasBG.getContext("2d");
+
+const drawButt = document.getElementById("S_Button");
+const drawScroll = document.getElementById("ScrollButton");
+var pos = 0;
 
 //Funciones de dibujo (Draw Functions)
 
@@ -417,6 +423,7 @@ function render() {
     ctxBG.drawImage(bg_01, bg_01_01x, canvasBG.height - (canvasBG.height / 2.5), canvasBG.width / 9 * 8, canvasBG.height / 2.5);
     ctxBG.drawImage(bg_01, bg_01_02x, canvasBG.height - (canvasBG.height / 2.5), canvasBG.width / 9 * 8, canvasBG.height / 2.5);
     ctxBG.drawImage(bg_01, bg_01_03x, canvasBG.height - (canvasBG.height / 2.5), canvasBG.width / 9 * 8, canvasBG.height / 2.5);
+
 }
 
 
@@ -502,6 +509,8 @@ function resetBall(b) {
 function movePaddle(evt) {
     let rect = canvas.getBoundingClientRect();
     user.y = evt.y - rect.top - user.height / 2;
+    mouseBool = true;
+    return rect;
 }
 
 //Update the game
@@ -543,7 +552,23 @@ function update() {
     }
 
     //Comprobar la posición del ratón y ejecutar la función "movePaddle"
+    /*if (canvas.onmouseover) {
+        canvas.addEventListener("mousemove", movePaddle);
+        drawButt.style.bottom = (((-user.y + 50) / 410) + 0.75) * 300 + "px";
+
+    } else {
+        console.log("gay lol");
+    }*/
+
+    mouseBool = false;
     canvas.addEventListener("mousemove", movePaddle);
+    //drawButt.style.bottom = (((-user.y + 50) / 410) + 0.75) * 410 + "px";
+
+    if (!mouseBool) {
+        user.y = -drawButt.value + 350;
+    } else {
+
+    }
 
     //Mover el bot haciendo uso de la posición de la ball y la suya propia, multiplicado por un nivel dinámico del bot.
     bot.y += (ball.y - (bot.y + bot.height / 2)) * computerLevel;
@@ -597,8 +622,6 @@ function update() {
     bg_03_03x++;
     if (bg_03_03x >= 1930)
         bg_03_03x = -1700;
-
-
 }
 
 //Game function
