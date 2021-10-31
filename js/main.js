@@ -12,14 +12,16 @@ var paddleUserShadow = new Image(50, 200);
 paddleUserShadow.src = "./img/paddleUserShadow.png";
 var paddleBotShadow = new Image(50, 200);
 paddleBotShadow.src = "./img/paddleBotShadow.png";
-var ballShadow = new Image(50, 50);
-ballShadow.src = "./img/ballShadow.png";
 var background = new Image(500, 500);
 background.src = "./img/background.png";
 var gameShadow = new Image(1280, 720);
 gameShadow.src = "./img/gameShadow.png";
-var fade = new Image(250, 250);
-fade.src = "./img/FadeNegro.png";
+var bg_01 = new Image(600, 150);
+bg_01.src = "./img/bg_01.png";
+var bg_02 = new Image(600, 150);
+bg_02.src = "./img/bg_02.png";
+var bg_03 = new Image(600, 150);
+bg_03.src = "./img/bg_03.png";
 
 var ballTrailInt = 0;
 var ballTrails = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
@@ -30,6 +32,16 @@ var bTy = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var bg1x = -465;
 var bg2x = 0;
 var bg3x = 465;
+
+var bg_01_01x = -1700;
+var bg_01_02x = -100;
+var bg_01_03x = 1500;
+var bg_02_01x = -1700;
+var bg_02_02x = -100;
+var bg_02_03x = 1500;
+var bg_03_01x = -1700;
+var bg_03_02x = -100;
+var bg_03_03x = 1500;
 
 /*                              IMAGEN:
 base_image = new Image();
@@ -47,6 +59,12 @@ const canvasBotPU = document.getElementById("BotPowerUpBar");
 const ctxUser = canvasUserPU.getContext("2d");
 const ctxBot = canvasBotPU.getContext("2d");
 
+const canvasBG = document.getElementById("BG");
+const ctxBG = canvasBG.getContext("2d");
+
+const cloud_01 = document.getElementById("img_01");
+const cloud_02 = document.getElementById("img_02");
+const cloud_03 = document.getElementById("img_03");
 
 //Funciones de dibujo (Draw Functions)
 
@@ -194,7 +212,7 @@ function checkKey(e) {
         } else if (e.keyCode == "40" || e.keyCode == "83") { // down arrow
 
         } else if (e.keyCode == "37" || e.keyCode == "65") { // left arrow
-            alert(bg1x);
+            alert(bg_01_01x);
         } else if (e.keyCode == "39" || e.keyCode == "68") { // right arrow
 
         }
@@ -305,12 +323,12 @@ function render() {
     //Red
     drawRed(ctx);
 
+    //Bola Shadow
+    drawCircle(ball.x + 8, ball.y + 8, ball.radius, "rgba(0, 0, 0, 0.25)", ctx);
+
     //Palas
     drawRect(user.x, user.y, user.width, user.height, "#00000000", ctx);
     drawRect(bot.x, bot.y, bot.width, bot.height, "#00000000", ctx);
-
-    //Bola Shadow
-    drawCircle(ball.x + 8, ball.y + 8, ball.radius, "rgba(0, 0, 0, 0.25)", ctx);
 
     //Ball trail things
     for (let i = 0; i < ballTrails.length - 1; i++) {
@@ -318,7 +336,6 @@ function render() {
             if (bTints[i] == 12) {
                 bTx[i] = ball.x;
                 bTy[i] = ball.y;
-                console.log("tetas");
             }
             if (bTints[i] <= 11)
                 drawCircle(bTx[i] + 8, bTy[i] + 8, ((bTints[i] / 12)) * ball.radius, "rgba(0, 0, 0, 0.25)", ctx); //Shadow
@@ -331,27 +348,33 @@ function render() {
             }
         }
     }
-    for (let i = 0; i < ballTrails.length - 1; i++) {
-        if (ballTrails[i] == true) {
-            drawCircle(bTx[i], bTy[i], ((bTints[i] / 12)) * ball.radius, "#62B9FF", ctx); //Circle
-        }
-    }
+
 
     //Bola
     drawCircle(ball.x, ball.y, ball.radius, "#62B9FF", ctx);
 
     //PowerUp Bars
     //User
-    drawRect(0, 0, canvasUserPU.width, canvasUserPU.height, "white", ctxUser);
-    drawRect(UserPU.x, UserPU.y, UserPU.width, UserPU.height, UserPU.color, ctxUser);
-    if (UserPU.width >= canvasUserPU.width)
-        drawText("Space", canvasUserPU.width / 6 * 1.15, +70, "white", ctxUser);
+    drawRect(0, 0, canvasUserPU.width, canvasUserPU.height, "#EDFF86", ctxUser);
+    if (UserPU.width >= canvasUserPU.width) {
+        drawRect(UserPU.x, UserPU.y, UserPU.width, UserPU.height, "#62B9FF", ctxUser);
+        drawText("Space", (canvasUserPU.width / 6 * 1.15) + 6, 76, "rgba(0, 0, 0, 0.4)", ctxUser);
+        drawText("Space", canvasUserPU.width / 6 * 1.15, 70, "white", ctxUser);
+    } else {
+        drawRect(UserPU.x, UserPU.y, UserPU.width, UserPU.height, "#b4deff", ctxUser);
+    }
+    ctxUser.drawImage(gameShadow, 0, 0, canvasUserPU.width, canvasUserPU.height);
 
     //Bot
-    drawRect(0, 0, canvasBotPU.width, canvasBotPU.height, "white", ctxBot);
-    drawRect(BotPU.x, BotPU.y, BotPU.width, BotPU.height, BotPU.color, ctxBot);
-    if (BotPU.width >= canvasBotPU.width)
-        drawText("Space", canvasBotPU.width / 6 * 1.15, +70, "white", ctxBot);
+    drawRect(0, 0, canvasBotPU.width, canvasBotPU.height, "#EDFF86", ctxBot);
+    if (BotPU.width >= canvasBotPU.width) {
+        drawRect(BotPU.x, BotPU.y, BotPU.width, BotPU.height, "#62B9FF", ctxBot);
+        drawText("Space", (canvasBotPU.width / 6 * 1.15) + 6, 76, "rgba(0, 0, 0, 0.4)", ctxBot);
+        drawText("Space", canvasBotPU.width / 6 * 1.15, 70, "white", ctxBot);
+    } else {
+        drawRect(BotPU.x, BotPU.y, BotPU.width, BotPU.height, "#b4deff", ctxBot);
+    }
+    ctxBot.drawImage(gameShadow, 0, 0, canvasBotPU.width, canvasBotPU.height);
 
     //IMAGENES
 
@@ -367,7 +390,39 @@ function render() {
     ctx.drawImage(paddleUser, user.x, user.y, user.width, user.height);
     ctx.drawImage(paddleBot, bot.x, bot.y, bot.width, bot.height);
 
+
+    //Ball trail object
+    for (let i = 0; i < ballTrails.length - 1; i++) {
+        if (ballTrails[i] == true) {
+            drawCircle(bTx[i], bTy[i], ((bTints[i] / 12)) * ball.radius, "#62B9FF", ctx); //Circle
+        }
+    }
+
     ctx.drawImage(gameShadow, 0, 0, canvas.width, canvas.height);
+
+
+    //BG and FG things
+    drawRect(0, 0, canvasBG.width, canvasBG.height, "#3ABEFC", ctxBG);
+
+    //Bottom clouds
+    ctxBG.drawImage(bg_03, bg_03_01x, canvasBG.height - (canvasBG.height / 1.25), canvasBG.width / 9 * 8, canvasBG.height / 2.5);
+    ctxBG.drawImage(bg_03, bg_03_02x, canvasBG.height - (canvasBG.height / 1.25), canvasBG.width / 9 * 8, canvasBG.height / 2.5);
+    ctxBG.drawImage(bg_03, bg_03_03x, canvasBG.height - (canvasBG.height / 1.25), canvasBG.width / 9 * 8, canvasBG.height / 2.5);
+    drawRect(0, canvasBG.height - (canvasBG.height / 2), canvasBG.width, canvasBG.height / 2.5, "#99e3fe", ctxBG);
+
+    //Middle clouds
+    ctxBG.drawImage(bg_02, bg_02_01x, canvasBG.height - (canvasBG.height / 1.7), canvasBG.width / 9 * 8, canvasBG.height / 2.5);
+    ctxBG.drawImage(bg_02, bg_02_02x, canvasBG.height - (canvasBG.height / 1.7), canvasBG.width / 9 * 8, canvasBG.height / 2.5);
+    ctxBG.drawImage(bg_02, bg_02_03x, canvasBG.height - (canvasBG.height / 1.7), canvasBG.width / 9 * 8, canvasBG.height / 2.5);
+    drawRect(0, canvasBG.height - (canvasBG.height / 4), canvasBG.width, canvasBG.height / 2.5, "#caf2fe", ctxBG);
+
+    //Top clouds
+    let pos = bg_01_01x;
+    cloud_01.style.left = pos + "px";
+    pos = bg_01_02x;
+    cloud_02.style.left = pos + "px";
+    pos = bg_01_03x;
+    cloud_03.style.left = pos + "px";
 }
 
 
@@ -514,16 +569,40 @@ function update() {
     //Ball trail things
     ballTrailInt++;
 
-    /*if (ballTrailInt % 2 == 0) {
-        ballTrails[(ballTrailInt / 2) - 1] = true;
-    }
-    if (ballTrailInt > 34) {
-        ballTrailInt = 0;
-    }*/
     ballTrails[ballTrailInt - 1] = true;
     if (ballTrailInt > 15) {
         ballTrailInt = 0;
     }
+
+    //BG and FG things
+    bg_01_01x += 3;
+    if (bg_01_01x >= 1930)
+        bg_01_01x = -1700;
+    bg_01_02x += 3;
+    if (bg_01_02x >= 1930)
+        bg_01_02x = -1700;
+    bg_01_03x += 3;
+    if (bg_01_03x >= 1930)
+        bg_01_03x = -1700;
+    bg_02_01x += 2;
+    if (bg_02_01x >= 1930)
+        bg_02_01x = -1700;
+    bg_02_02x += 2;
+    if (bg_02_02x >= 1930)
+        bg_02_02x = -1700;
+    bg_02_03x += 2;
+    if (bg_02_03x >= 1930)
+        bg_02_03x = -1700;
+    bg_03_01x++;
+    if (bg_03_01x >= 1930)
+        bg_03_01x = -1700;
+    bg_03_02x++;
+    if (bg_03_02x >= 1930)
+        bg_03_02x = -1700;
+    bg_03_03x++;
+    if (bg_03_03x >= 1930)
+        bg_03_03x = -1700;
+
 
 }
 

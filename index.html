@@ -9,27 +9,29 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
-<body>
+<body style=" margin: 0px; padding: 0px; overflow-x: hidden;">
+    <!--background-image:url(./img/bgImage.png);-->
+    <canvas id="BG" width="1920" height="1080"></canvas>
+    <div id="game">
+        <div id="allPong">
+            <div id="pongShadowShadow"></div>
 
-    <br><br><br>
-    <div id="allPong">
-        <div id="pongShadowShadow"></div>
+            <div id="pongShadow">
+                <div id="pongDiv">
+                    <canvas id="pong" class="center" width="1000" height="400"></canvas>
+                </div>
 
-        <div id="pongShadow">
-            <div id="pongDiv">
-                <canvas id="pong" class="center" width="1000" height="400"></canvas>
             </div>
-
+        </div>
+        <br><br><br>
+        <div id="PowerUpBar" width="900" height="100">
+            <canvas class="PUbar" id="UserPowerUpBar" width="300" height="90"></canvas>
+            <canvas class="PUbar" id="BotPowerUpBar" width="300" height="90"></canvas>
         </div>
     </div>
-    <br><br><br>
-    <div id="PowerUpBar" width="900" height="100">
-        <canvas id="UserPowerUpBar" width="300" height="90"></canvas>
-        <canvas id="BotPowerUpBar" width="300" height="90"></canvas>
-    </div>
-    <div id="wrap">
-        <p>move the cursor around the screen</p>
-    </div>
+    <img class="cloudimg" id="img_01" src="./img/bg_01.png" alt="nubeXD">
+    <img class="cloudimg" id="img_02" src="./img/bg_01.png" alt="nubeXD">
+    <img class="cloudimg" id="img_03" src="./img/bg_01.png" alt="nubeXD">
     <script src="./js/main.js" type="text/JavaScript"></script>
 </body>
 

@@ -1,17 +1,18 @@
 #pong {
     border: 8px solid #78E076;
+    background-color: #78E076;
     border-radius: 30px;
 }
 
 #pongDiv {
     border: 16px solid #8BFF89;
+    background-color: #8BFF89;
     border-radius: 50px;
     width: 1016px;
     height: 416px;
 }
 
 #pongShadow {
-    border: 0px solid black;
     border-radius: 60px;
     margin-left: auto;
     margin-right: auto;
@@ -21,7 +22,6 @@
 }
 
 #pongShadowShadow {
-    border: 0px solid black;
     border-radius: 60px;
     background-color: rgba(0, 0, 0, 0.4);
     width: 1048px;
@@ -51,52 +51,34 @@
     gap: 250px;
 }
 
-#UserPowerUpBar {
-    border: 8px solid black;
+.PUbar {
+    border: 16px solid #8BFF89;
+    background-color: #8BFF89;
     border-radius: 30px;
 }
 
-#BotPowerUpBar {
-    border: 8px solid black;
-    border-radius: 30px;
+#game {
+    position: absolute;
+    width: 100%;
+    height: 73%;
+    margin-top: 6.5%;
 }
 
-
-/* effect things */
-
-#wrap {
+#BG {
+    position: absolute;
     width: 100%;
     height: 100%;
-    position: relative;
-    overflow: hidden;
 }
 
-#wrap p {
+#FG {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    color: rgba(255, 255, 255, .5);
-    font-size: 30px;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    text-align: center;
+    width: 100%;
+    height: 100%;
 }
 
-.ball {
-    pointer-events: none;
+.cloudimg {
     position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: gray;
-    animation: implode 1s ease-in-out;
-    animation-fill-mode: both;
-    opacity: .5;
-}
-
-@keyframes implode {
-    100% {
-        transform: scale(0)
-    }
+    bottom: 0%;
+    width: 90%;
+    height: 40%;
 }
