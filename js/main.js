@@ -62,10 +62,6 @@ const ctxBot = canvasBotPU.getContext("2d");
 const canvasBG = document.getElementById("BG");
 const ctxBG = canvasBG.getContext("2d");
 
-const cloud_01 = document.getElementById("img_01");
-const cloud_02 = document.getElementById("img_02");
-const cloud_03 = document.getElementById("img_03");
-
 //Funciones de dibujo (Draw Functions)
 
 //RECTÁNGULO O CUADRADO
@@ -417,12 +413,9 @@ function render() {
     drawRect(0, canvasBG.height - (canvasBG.height / 4), canvasBG.width, canvasBG.height / 2.5, "#caf2fe", ctxBG);
 
     //Top clouds
-    let pos = bg_01_01x;
-    cloud_01.style.left = pos + "px";
-    pos = bg_01_02x;
-    cloud_02.style.left = pos + "px";
-    pos = bg_01_03x;
-    cloud_03.style.left = pos + "px";
+    ctxBG.drawImage(bg_01, bg_01_01x, canvasBG.height - (canvasBG.height / 2.5), canvasBG.width / 9 * 8, canvasBG.height / 2.5);
+    ctxBG.drawImage(bg_01, bg_01_02x, canvasBG.height - (canvasBG.height / 2.5), canvasBG.width / 9 * 8, canvasBG.height / 2.5);
+    ctxBG.drawImage(bg_01, bg_01_03x, canvasBG.height - (canvasBG.height / 2.5), canvasBG.width / 9 * 8, canvasBG.height / 2.5);
 }
 
 
@@ -553,6 +546,7 @@ function update() {
 
     //Mover el bot haciendo uso de la posición de la ball y la suya propia, multiplicado por un nivel dinámico del bot.
     bot.y += (ball.y - (bot.y + bot.height / 2)) * computerLevel;
+    //user.y += (ball.y - (user.y + user.height / 2)) * computerLevel;
 
     //Background things
     bg1x++;
